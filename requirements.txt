@@ -1,0 +1,12 @@
+requests
+socket
+socks
+time
+random
+threading
+sys
+ssl
+datetime
+os
+colorama 
+urllib.parse

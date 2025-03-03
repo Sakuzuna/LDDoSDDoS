@@ -1,0 +1,14 @@
+if u are using windows download python recommended higher than 3.9 then do 
+
+pip install -r requirements.txt
+
+after you do it run cloudflare.py or main.py
+
+cloudflare.py bypassed cloudlfare and captcha and main.py is just normal ddos to run it
+either do
+
+python3 main.py 
+
+or
+
+python3 cloudflare.py
