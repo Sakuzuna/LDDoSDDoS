@@ -1,7 +1,0 @@
-# Check the current thread limit
-cat /proc/sys/kernel/threads-max
-
-# Increase the thread limit (e.g., to 100000)
-sudo sysctl -w kernel.threads-max=100000
-
-kernel.threads-max=100000
