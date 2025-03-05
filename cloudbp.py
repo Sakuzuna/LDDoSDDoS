@@ -40,7 +40,6 @@ print(fr'''
 └─────────────────────────────────────────────┘
 ''')
 
-# User-Agents from cloudflare-bypass.py
 UA = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.{} Safari/537.36',
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 13.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.5249.{} Safari/537.36',
@@ -54,7 +53,6 @@ UA = [
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Brave/1.44.105 Chrome/105.0.5195.{} Safari/537.36',
 ]
 
-# Referers from cloudflare-bypass.py
 RF = [
     'https://www.facebook.com/l.php?u={}',
     'https://www.facebook.com/sharer/sharer.php?u={}',
@@ -68,7 +66,6 @@ RF = [
     'http://www.bing.com/search?q={}',
 ]
 
-# Additional random headers from cloudflare-bypass.py
 RH = [
     'Accept-Ranges: none',
     'X-Frame-Options: DENY',
@@ -105,8 +102,8 @@ out_file = "proxy.txt"
 thread_num = 800
 data = ""
 cookies = ""
-append_junk = False  # New variable for junk string appending
-requests_per_proxy = 5  # New variable for proxy rotation limit
+append_junk = False  
+requests_per_proxy = 5  
 
 strings = "asdfghjklqwertyuiopZXCVBNMQWERTYUIOPASDFGHJKLzxcvbnm1234567890&"
 Intn = random.randint
@@ -431,9 +428,9 @@ def main():
         except:
             print(fr"{red}> Could{reset} not read data file. Proceeding without data.")
 
-    append_junk = input(fr"{red}> Add junk strings to path? (y/n, default:n): ").strip().lower() == "y"
+    append_junk = input(fr"{red}> Add {reset}junk strings to path? (y/n, default:n): ").strip().lower() == "y"
 
-    requests_per_proxy = input(fr"{red}> Requests per proxy (default:5): ").strip()
+    requests_per_proxy = input(fr"{red}> Requests {reset}per proxy (default:5): ").strip()
     requests_per_proxy = int(requests_per_proxy) if requests_per_proxy and requests_per_proxy.isdigit() else 5
 
     out_file = input(fr"{red}> Enter{reset} proxies file name (default:proxy.txt): ").strip() or "proxy.txt"
