@@ -646,8 +646,8 @@ def main():
 {red}-> {white}Proxy V ⦻  {red}:  {green}{proxy_ver}
 {red}-> {white}Proxy F ☣  {red}:  {green}{out_file}
 {red}---------------------------------------
-{red}-> {white}GitHub    {red} :  {green}https://github.com/Sakuzuna/
-{red}-> {white}CheckHost {red} :  {green}https://check-host.net/check-http?host={url}
+{red}-> {white}GitHub  👨‍💻  {red} :  {green}https://github.com/Sakuzuna/
+{red}-> {white}CheckHost ✔️{red} :  {green}https://check-host.net/check-http?host={url}
 {red}--------------------------------------- {reset}""")
                                            
    
